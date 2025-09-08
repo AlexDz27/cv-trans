@@ -1,5 +1,7 @@
 <?php
 
+// TODO: в пизду, просто сделать ссылки с подчёркиваниями (типа кнопки)
+
 enum Languages: string {
   case RU = 'ru';
   case ENG = 'eng';
@@ -26,8 +28,24 @@ $lang = resolveLangFromUri();
 <body>
 
 <main class="main cont">
+	<div class="switch">
+    <input id="language-toggle" class="check-toggle check-toggle-round-flat" type="checkbox">
+    <label for="language-toggle"></label>
+    <span class="js-btn-lang on">RU</span>
+    <span class="js-btn-lang off">ENG</span>
+  </div>
+
   <p>Какой-то контент, <?= $lang ?></p>
 </main>
+
+<script>
+  const langBtns = document.querySelectorAll('.js-btn-lang')
+  for (const langBtn of langBtns) {
+    langBtn.onclick = () => {
+      window.location.href = window.location.href + '?lang=' + langBtn.textContent
+    }
+  }
+</script>
   
 </body>
 </html>
